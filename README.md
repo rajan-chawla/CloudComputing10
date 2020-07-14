@@ -5,6 +5,7 @@ Cloud computing project for semester
 * Client will run on port 3000 using the followng command.
 * Command: npm run start
 
+
 # Server
 * Server will run on port 5010 using the following commend.
 * Development: npm run devstart
