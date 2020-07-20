@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-class ocrtext extends Component {
+class Ocrtext extends Component {
 
     componentWillMount() {
 
@@ -43,4 +43,4 @@ class ocrtext extends Component {
     }
 }
 
-export default withRouter(ocrtext);
+export default withRouter(Ocrtext);

@@ -1,0 +1,15 @@
+.footerWrapper {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: var(--blue, #2196F3);
+    z-index: 999;
+}
+
+.footerText {
+    font-size: 0.65em;
+    text-align: center;
+    padding: 6px 0px;
+    margin: 0;
+    color: #FFF;
+}
