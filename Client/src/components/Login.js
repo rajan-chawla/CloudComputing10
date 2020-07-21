@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
-import "../css/login_signup.css";
+import "../css/loginSignup.css";
 import "../css/index.css";
 import axios from "axios";
 
@@ -15,9 +15,7 @@ class Login extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.submituserRegistrationForm = this.submituserRegistrationForm.bind(
-      this
-    );
+    this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
   }
 
   handleChange(e) {
@@ -37,43 +35,13 @@ class Login extends React.Component {
       fields["password"] = "";
       this.setState({ fields: fields });
       axios
-        .post("/api/post/login", {
+        .post("/api/login", {
           email: this.state.fields["emailid"],
           password: this.state.fields["password"]
         })
         .then(response => {
           if (response.data.code == 200) {
             console.log(response);
-            window.sessionStorage.setItem("userid", response.data.userid);
-            window.localStorage.setItem("userid", response.data.userid);
-            window.sessionStorage.setItem("userrole", response.data.userrole);
-            window.localStorage.setItem("userrole", response.data.userrole);
-            console.log(this.props.products.cartItems);
-            if(this.props.products.cartItems.length>0)
-            {
-              const userID=window.sessionStorage.getItem("userid")
-              this.props.products.cartItems.forEach(
-                  productInCart => {
-                    axios
-                    .post("/api/post/storeCartInfoFromLocalStorage", {
-                        product_id: productInCart.id ,
-                        buyer_id:userID,
-                        quantity:productInCart.quantity
-                      })
-                    }
-              )
-              localStorage.setItem('cartItems', JSON.stringify([]));
-            }
-
-            if(this.props.location.fromCart==='cart')
-            {
-
-              window.location.replace("/cart");
-            }
-            else {
-              window.location.replace("/");
-            }
-
           } else {
             errors["emailid"] = "Invalid Email or Password.";
             this.setState({
@@ -95,17 +63,6 @@ class Login extends React.Component {
     if (!fields["emailid"]) {
       formIsValid = false;
       errors["emailid"] = "*Please enter your email.";
-    }
-
-    if (typeof fields["emailid"] !== "undefined") {
-      //regular expression for email validation
-      var pattern = new RegExp(
-        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-      );
-      if (!pattern.test(fields["emailid"])) {
-        formIsValid = false;
-        errors["emailid"] = "Please enter valid email-ID.";
-      }
     }
 
     if (!fields["password"]) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'semantic-ui-react';
-import "../css/LeftPane.css";
+import "../css/leftPane.css";
 
 class LeftPane extends Component {
 

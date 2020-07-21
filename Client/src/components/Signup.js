@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../css/login_signup.css";
+import "../css/loginSignup.css";
 
 class Signup extends React.Component {
     constructor() {
@@ -23,6 +23,7 @@ class Signup extends React.Component {
     }
 
     async submituserRegistrationForm(event) {
+        console.log("Request received");
         event.preventDefault();
         if (this.validateForm()) {
             let fields = {};
@@ -35,13 +36,13 @@ class Signup extends React.Component {
                 data[name] = value;
             }
             await axios
-                .post("/api/post/signup", data)
+                .post("/api/signup", data)
                 .then(response => {
                     console.log("Response data ", response.data);
                     responseStatus = response.data;
                     if (response.data.code == 200) {
                         axios
-                            .post("/api/post/login", {
+                            .post("/api/login", {
                                 email: this.state.fields["email"],
                                 password: this.state.fields["password"]
                             })
@@ -73,15 +74,15 @@ class Signup extends React.Component {
         let errors = {};
         let formIsValid = true;
 
-        if (!fields["name"]) {
+        if (!fields["firstname"]) {
             formIsValid = false;
-            errors["name"] = "*Please enter your name.";
+            errors["firstname"] = "*Please enter your name.";
         }
 
-        if (typeof fields["name"] !== "undefined") {
-            if (!fields["name"].match(/^[a-zA-Z ]*$/)) {
+        if (typeof fields["firstname"] !== "undefined") {
+            if (!fields["firstname"].match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
-                errors["name"] = "*Please enter alphabet characters only.";
+                errors["firstname"] = "*Please enter alphabet characters only.";
             }
         }
         if (!fields["lastname"]) {
@@ -109,13 +110,6 @@ class Signup extends React.Component {
                 errors["email"] = "*Please enter valid email-ID.";
             }
         }
-
-        if (!fields["phone"]) {
-            formIsValid = false;
-            errors["phone"] = "*Please enter your mobile no.";
-        }
-
-
 
         if (!fields["password"]) {
             formIsValid = false;
@@ -151,7 +145,7 @@ class Signup extends React.Component {
                             <form method="post" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
                                 <div className="form-group">
                                     <label>First Name </label>
-                                    <input type="text" className="form-control" name="name" placeholder="Enter Your First name" value={this.state.fields.username} onChange={this.handleChange} />
+                                    <input type="text" className="form-control" name="firstname" placeholder="Enter Your First name" value={this.state.fields.username} onChange={this.handleChange} />
                                     <div className="errorMsg">{this.state.errors.name}</div>
                                 </div>
                                 <div className="form-group">
@@ -176,8 +170,8 @@ class Signup extends React.Component {
                                     <div className="errorMsg">{this.state.errors.confirmpassword}</div>
                                 </div>
                                 <br/>
-                                <input type="submit" className="btn btn-primary btn-block" value="Register" />
                                 <div className="form-group">
+                                <input type="submit" className="btn btn-primary btn-block" value="Register" />
                                 </div>
                             </form>
 
