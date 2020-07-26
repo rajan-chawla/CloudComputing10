@@ -5,7 +5,7 @@ var pool = require("./db");
 userRoutes.post("/api/login", function (req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
-    const query = "SELECT password FROM `cloudcomputing`.`user` WHERE email = '" + email + "'";
+    const query = "SELECT * FROM `cloudcomputing`.`user` WHERE email = '" + email + "'";
     pool.query(query, (q_err, q_res) => {
       if (q_err != null) {
         console.log("error ocurred", q_err);
@@ -21,8 +21,7 @@ userRoutes.post("/api/login", function (req, res, next) {
             res.send({
               code: 200,
               success: "login sucessfull",
-              userid: q_res[0].id,
-              userrole: q_res[0].role
+              userid: q_res[0].id
             });
           } else {
             res.send({

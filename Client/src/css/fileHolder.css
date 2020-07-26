@@ -1,0 +1,31 @@
+.FileHolder {
+    text-align: center;
+  }
+  
+  
+.FileHolder-header {
+    background-color: #ffffff;
+    /* min-height: 100vh; */
+    flex-grow: 1;
+    /* flex-basis: 50%; */
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    font-size: calc(10px + 2vmin);
+    color: rgb(29, 27, 27);
+  }
+
+  .Fileholder-dropzone {
+    text-align: center;
+    padding: 100px;
+    margin: 50px 50px 10px 50px;
+    border: 3px dashed #eeeeee;
+    background-color: #fafafa;
+    color: #bdbdbd;
+  }
+
+  .FileHolder-filenames{
+    text-align: left;
+    padding-left: 50px;
+  }
+  

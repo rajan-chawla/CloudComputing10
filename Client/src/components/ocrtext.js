@@ -1,46 +1,28 @@
-import React, { Component } from 'react';
+import React, {useState}  from 'react';
+import 'semantic-ui-css/semantic.min.css'
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
+import DisplayBoard from "./DisplayBoard"
+import FileHolder from './FileHolder';
+import {FileContext} from '../hooks/FileContext';
 
-class Ocrtext extends Component {
-
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    getText = async (imgfile) =>{
-        var formdata = new FormData();
-        formdata.append("photo", imgfile);
-        console.log(formdata);
-        await axios({
-            method: 'post',
-            url: '/api/converttotext',
-            data: formdata,
-            headers: {'Content-Type': 'multipart/form-data' }
-            })
-            .then(function (response) {
-                //handle success
-                console.log(response);
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
-    }
-
-
-    render() {
-        return (
-            <div>
-                <h1>Upload photo</h1> 
-                <input type="file" className="form-control"  onChange={e => this.getText(e.target.files[0])} />
+const Ocrtext = () =>  {
+    const [isLoading, setLoading] = useState(false);
+    const [result, setResult] = useState({ FileType: "", FileContent: "" }); 
+    return (
+        <div>
+            {console.log("Value - ", window.localStorage.getItem("userid"))}
+            {window.localStorage.getItem("userid") === null?
+            window.location.replace("/")
+            :
+              <div className="App-content">
+                <FileContext.Provider value={[result, setResult, isLoading, setLoading]}>
+                    <FileHolder />
+                    <DisplayBoard />
+                </FileContext.Provider>
             </div>
-        )
-    }
+            }
+        </div>
+    )
 }
 
 export default withRouter(Ocrtext);

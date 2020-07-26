@@ -1,34 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import './css/index.css';
 import 'semantic-ui-css/semantic.min.css'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Signup from './components/Signup';
 import Header from './components/Header';
-import LeftPane from './components/LeftPane';
 import Footer from './components/Footer';
-import Login from './components/Login';
+import Ocrtext from "./components/Ocrtext";
+import Home from "./components/Home";
 
 function App() {
+  const [isLoading, setLoading] = useState(false);
+  const [result, setResult] = useState({ FileType: "", FileContent: "" });
+
   return (
     <div className="App">
-       <Router>
-            <Switch>
-            <Header />
-            </Switch>
-          </Router>
-      <div class="modal-body row">
-        <div class="col-md-6">
-          <LeftPane />
-        </div>
-        <div class="col-md-3">
-        <Login/>
-        </div>
-        <div class="col-md-3">
-          <Signup/>
-        </div>
-      </div>
-      <Footer/>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/Ocrtext" component={Ocrtext} />
+        </Switch>
+        <Footer />
+      </Router>    
     </div>
   );
 }

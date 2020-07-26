@@ -49,9 +49,10 @@ class Signup extends React.Component {
                             .then(response => {
                                 if (response.data.code == 200) {
                                     console.log(response);
-                                    //   window.sessionStorage.setItem("userid", response.data.userid);
-                                    //   window.sessionStorage.setItem("userrole", response.data.userrole);
-                                    //   window.location.replace("/");
+                                    window.sessionStorage.setItem("userid", response.data.userid);
+                                    window.localStorage.setItem("userid", response.data.userid);
+                                    window.alert("Signup Successful");
+                                    window.location.replace("/ocrtext");
                                 }
                             })
                             .catch(function (error) {

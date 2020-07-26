@@ -42,6 +42,9 @@ class Login extends React.Component {
         .then(response => {
           if (response.data.code == 200) {
             console.log(response);
+            window.sessionStorage.setItem("userid", response.data.userid);
+            window.localStorage.setItem("userid", response.data.userid);
+            window.location.replace("/ocrtext");
           } else {
             errors["emailid"] = "Invalid Email or Password.";
             this.setState({

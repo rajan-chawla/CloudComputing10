@@ -7,16 +7,20 @@ var pool = require("./db");
 var user = require("./user");
 router.use("/", user);
 
-router.post("/api/converttotext",upload.any(), (req, res) =>{
-    var photo = req.files[0].path;
-    var data = "Error loading in data. Check router.js";
-    tesseract.recognize(photo, 'eng', { 
+router.post("/api/converttotext",function (req, res){
+    console.log("Request body------", req.body.fileType)
+    tesseract.recognize(req.body.fileContent, 'eng', { 
         logger: m => {
             console.log(m)
         } 
     })
     .then(({ data: { text } }) => {
-        res.send(text)
+        console.log(text)
+        res.send({
+            code: 200,
+            success: "Sucess",
+            result: text
+          });
     })
 });
 
