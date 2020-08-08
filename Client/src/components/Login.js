@@ -34,11 +34,21 @@ class Login extends React.Component {
       fields["emailid"] = "";
       fields["password"] = "";
       this.setState({ fields: fields });
+      console.log("Data------", fields);
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+      // const requestBody = {
+      //   email:this.state.fields["emailid"],
+      //   password: this.state.fields["password"]
+      // }
+      const params = new URLSearchParams();
+      params.append('email', this.state.fields["emailid"]);
+      params.append('password', this.state.fields["password"]);
       axios
-        .post("/api/login", {
-          email: this.state.fields["emailid"],
-          password: this.state.fields["password"]
-        })
+        .post("/api/login", params, config)
         .then(response => {
           if (response.data.code == 200) {
             console.log(response);

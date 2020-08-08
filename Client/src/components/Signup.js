@@ -30,22 +30,28 @@ class Signup extends React.Component {
             let responseStatus = "";
             const formdata = new FormData(event.target);
             var data = {};
+            const params = new URLSearchParams();
 
             for (let name of formdata.keys()) {
                 const value = formdata.get(name);
                 data[name] = value;
+                params.append(name, value);
             }
+            const config = {
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                }
+              }
+    
+
             await axios
-                .post("/api/signup", data)
+                .post("/api/signup", params, config)
                 .then(response => {
                     console.log("Response data ", response.data);
                     responseStatus = response.data;
                     if (response.data.code == 200) {
                         axios
-                            .post("/api/login", {
-                                email: this.state.fields["email"],
-                                password: this.state.fields["password"]
-                            })
+                            .post("/api/login", params, config)
                             .then(response => {
                                 if (response.data.code == 200) {
                                     console.log(response);
