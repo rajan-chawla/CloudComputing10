@@ -8,7 +8,7 @@ var user = require("./user");
 router.use("/", user);
 
 router.post("/api/converttotext",function (req, res){
-    console.log("Request body------", req.body.fileType)
+    console.log("Request Message body------", req.body.fileType)
     tesseract.recognize(req.body.fileContent, 'eng', { 
         logger: m => {
             console.log(m)
