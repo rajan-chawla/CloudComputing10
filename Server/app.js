@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/src', express.static('src'))
 app.use('/uploads', express.static('uploads'));
 app.use(express.static("build"));
 app.get("/", (req, res) => {

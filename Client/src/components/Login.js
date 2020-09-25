@@ -40,10 +40,6 @@ class Login extends React.Component {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }
-      // const requestBody = {
-      //   email:this.state.fields["emailid"],
-      //   password: this.state.fields["password"]
-      // }
       const params = new URLSearchParams();
       params.append('email', this.state.fields["emailid"]);
       params.append('password', this.state.fields["password"]);
